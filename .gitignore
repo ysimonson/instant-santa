@@ -1,0 +1,11 @@
+*.pyc
+.DS_Store
+/static/generated/*
+!/static/generated/empty
+/static/saved/*
+!/static/saved/empty
+/.Python
+/bin
+/include
+/lib
+/share

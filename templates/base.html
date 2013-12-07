@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% end %}</title> 
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="fragment" content="!" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="shortcut icon" href="{{ static_url('images/favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ static_url('lib/bootstrap/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ static_url('lib/bootstrap/css/bootstrap-theme.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ static_url('css/base.css') }}" />
+
+        <style type="text/css">
+            /*For Windows Phone 8 and Internet Explorer 10*/
+            @-webkit-viewport   { width: device-width; }
+            @-moz-viewport      { width: device-width; }
+            @-ms-viewport       { width: device-width; }
+            @-o-viewport        { width: device-width; }
+            @viewport           { width: device-width; }
+        </style>
+
+        {% block extra_css %}{% end %}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="{{ static_url('lib/html5shiv.js') }}"></script>
+            <script src="{{ static_url('lib/respond/respond.min.js') }}"></script>
+        <![endif]-->
+
+        <!-- For Windows Phone 8 and Internet Explorer 10 -->
+        <script type="text/javascript">
+            if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+                var msViewportStyle = document.createElement("style")
+                msViewportStyle.appendChild(document.createTextNode("@-ms-viewport{width:auto!important}"))
+                document.getElementsByTagName("head")[0].appendChild(msViewportStyle)
+            }
+        </script>
+
+        <script type="text/javascript" src="{{ static_url('lib/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        {% block body %}{% end %}
+
+        <script type="text/javascript" src="{{ static_url('lib/jquery/jquery-1.10.2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ static_url('lib/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ static_url('js/base.js') }}"></script>
+        {% block extra_js %}{% end %}
+    </body>
+</html>

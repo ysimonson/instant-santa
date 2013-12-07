@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Runs the server with live compilation of sass/coffeescript
+set -e
+set -a
+
+# Close all child processes on exit
+function on_quit {
+    kill `jobs -p`
+}
+
+trap on_quit EXIT
+
+# Run the server
+./scripts/using-profile dev server &
+
+# Start SASS/coffee live compilation
+sass --watch assets/sass:static/css --no-cache &
+coffee --watch --output static/js assets/coffeescript &
+
+while true; do read x; done

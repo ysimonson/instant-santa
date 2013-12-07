@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Executes an oz action with a given environment profile in the env directory
+set -e
+set -a
+
+source bin/activate
+
+PROFILE_FILE=env/$1.env
+
+if [ -f $PROFILE_FILE ];
+then
+    source $PROFILE_FILE
+else
+    echo "ERROR: Profile '$1' does not exist (it should be at '$PROFILE_FILE')" 1>&2
+    exit 1
+fi
+
+shift
+exec oz "$@"

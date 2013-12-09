@@ -12,23 +12,23 @@ class ImageHandler(base.BaseHandler):
     @web.asynchronous
     @gen.engine
     def get(self, url):
-        http_client = httpclient.AsyncHTTPClient()
-        response = yield http_client.fetch(url)
-
-        if response.code == 404:
-            raise web.HTTPError(404)
-        elif response.code != 200:
-            raise web.HTTPError(400)
-
-        contents = response.body
-        path = "generated/%s.jpg" % hashlib.sha256(contents).hexdigest()
+        path = "generated/%s.jpg" % hashlib.sha256(url).hexdigest()
 
         if not os.path.exists(static_path(path)):
-            np_array = numpy.fromstring(contents, numpy.uint8)
-            img = cv2.imdecode(np_array, cv2.CV_LOAD_IMAGE_COLOR)
-            rects = engine.detect(img)
-            img = engine.santas(rects, img)
-            cv2.imwrite(static_path(path), img)
+            http_client = httpclient.AsyncHTTPClient()
+            response = yield http_client.fetch(url)
+
+            if response.code == 404:
+                raise web.HTTPError(404)
+            elif response.code != 200:
+                raise web.HTTPError(400)
+
+            if not os.path.exists(static_path(path)):
+                np_array = numpy.fromstring(response.body, numpy.uint8)
+                img = cv2.imdecode(np_array, cv2.CV_LOAD_IMAGE_COLOR)
+                rects = engine.detect(img)
+                img = engine.santas(rects, img)
+                cv2.imwrite(static_path(path), img)
 
         self.redirect(self.static_url(path))
 

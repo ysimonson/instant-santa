@@ -27,7 +27,12 @@ class ImageHandler(base.BaseHandler):
                 np_array = numpy.fromstring(response.body, numpy.uint8)
                 img = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
                 rects = engine.detect(img)
-                img = engine.santas(rects, img)
+
+                try:
+                    img = engine.santas(rects, img)
+                except engine.NoFacesException:
+                    pass
+
                 cv2.imwrite(static_path(path), img)
 
         self.redirect(self.static_url(path))

@@ -1,3 +1,5 @@
+import oz
+
 class BoostrapMiddleware(object):
     def __init__(self):
         super(BoostrapMiddleware, self).__init__()

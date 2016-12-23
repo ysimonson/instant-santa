@@ -5,6 +5,9 @@ hat = cv2.imread("assets/opencv/hat.png", -1)
 beard = cv2.imread("assets/opencv/beard.png", -1)
 cascade = cv2.CascadeClassifier("assets/opencv/haarcascade_frontalface_alt.xml")
 
+class NoFacesException(Exception):
+    pass
+
 def detect(img):
     rects = cascade.detectMultiScale(img, 1.3, 4, cv2.CASCADE_SCALE_IMAGE, (20, 20))
 
@@ -29,7 +32,7 @@ def insert_image(base_img, img, x, y, width, height):
 
 def santas(rects, img):
     if len(rects) == 0:
-        raise Exception("No faces")
+        raise NoFacesException()
 
     for x1, y1, x2, y2 in rects:
         hat_width, hat_height, scaled_hat_width, scaled_hat_height = get_image_scale(hat, x1, y1, x2, y2)

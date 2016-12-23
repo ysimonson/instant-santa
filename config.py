@@ -3,7 +3,7 @@ import os
 project_name = "instantsanta"
 
 plugins = [
-    "oz.plugins.core",
+    "oz.core",
     project_name,
 ]
 

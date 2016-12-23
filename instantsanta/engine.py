@@ -6,7 +6,7 @@ beard = cv2.imread("assets/opencv/beard.png", -1)
 cascade = cv2.CascadeClassifier("assets/opencv/haarcascade_frontalface_alt.xml")
 
 def detect(img):
-    rects = cascade.detectMultiScale(img, 1.3, 4, cv2.cv.CV_HAAR_SCALE_IMAGE, (20,20))
+    rects = cascade.detectMultiScale(img, 1.3, 4, cv2.CASCADE_SCALE_IMAGE, (20, 20))
 
     if len(rects) == 0:
         return []

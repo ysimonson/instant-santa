@@ -12,7 +12,7 @@ class ImageHandler(base.BaseHandler):
     @web.asynchronous
     @gen.engine
     def get(self, url):
-        path = "generated/%s.jpg" % hashlib.sha256(url).hexdigest()
+        path = "generated/%s.jpg" % hashlib.sha256(url.encode("utf8")).hexdigest()
 
         if not os.path.exists(static_path(path)):
             http_client = httpclient.AsyncHTTPClient()

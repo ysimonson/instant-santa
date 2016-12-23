@@ -1,6 +1,6 @@
 import os
 import cv2
-import base
+from instantsanta.handlers import base
 import numpy
 import hashlib
 from instantsanta import engine
